@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EK THA RAJA, EK THI RANI | 25 Years of Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #D4AF37;
+            --silver: #C0C0C0;
+            --rose: #e74c3c;
+            --deep-red: #8e0000;
+            --cream: #fffdf9;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* =========================================
+           PAGE 0: GLASS RED INTRO & HEARTS
+           ========================================= */
+        #cover-page {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, rgba(142, 0, 0, 0.95), rgba(80, 0, 0, 1));
+            display: flex; justify-content: center; align-items: center;
+            z-index: 2000;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            padding: 60px 40px; text-align: center; max-width: 80%; z-index: 10;
+        }
+
+        .cover-heading {
+            font-family: 'Playfair Display', serif; color: #fff;
+            font-size: 3rem; margin: 0 0 40px 0; text-transform: uppercase;
+            letter-spacing: 2px; line-height: 1.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .enter-btn {
+            background-color: white; color: var(--deep-red); font-family: 'Poppins', sans-serif;
+            font-weight: 600; border: none; padding: 15px 40px; font-size: 1.2rem;
+            border-radius: 50px; cursor: pointer; text-transform: uppercase;
+            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .enter-btn:hover { transform: scale(1.1); background-color: #f0f0f0; }
+
+        .hide-cover { transform: translateY(-100vh) !important; }
+
+        .heart-float {
+            position: absolute; bottom: -10%; z-index: 1; opacity: 0.8;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-120vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        /* =========================================
+           UPDATED MODERN NAVIGATION (No Numbers)
+           ========================================= */
+        #main-wrapper { opacity: 0; transition: opacity 1.5s ease 0.5s; }
+        .show-content { opacity: 1 !important; }
+
+        nav {
+            position: sticky; top: 0; background: white; padding: 20px 15px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 25px;
+            z-index: 1500; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        nav button {
+            background: none; border: none; padding: 5px 0;
+            cursor: pointer; font-weight: 600; color: #444; 
+            font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s; position: relative;
+        }
+
+        nav button::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: 0; left: 0; background-color: var(--rose);
+            transition: width 0.3s ease;
+        }
+
+        nav button:hover { color: var(--rose); }
+        nav button:hover::after { width: 100%; }
+
+        /* =========================================
+           CHAPTER COVER PAGES
+           ========================================= */
+        .chapter-cover {
+            display: none;
+            flex-direction: column; justify-content: center; align-items: center;
+            min-height: 70vh; text-align: center;
+            background: radial-gradient(circle, #fff 0%, #faeee1 100%);
+            border-radius: 30px; margin: 40px 5%; padding: 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            animation: pageEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .chapter-cover h2 {
+            font-size: 2.8rem; color: var(--deep-red); line-height: 1.5;
+            margin-bottom: 40px; max-width: 900px; font-style: italic;
+        }
+        .chapter-btn {
+            padding: 15px 50px; font-size: 1.2rem; font-weight: bold;
+            background: var(--gold); color: white; border: none; border-radius: 50px;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        .chapter-btn:hover { transform: scale(1.1); background: var(--deep-red); }
+
+        /* =========================================
+           PAGES & HORIZONTAL LAYOUT
+           ========================================= */
+        .page { 
+            display: none; 
+            padding: 40px 5% 120px 5%; 
+            min-height: 100vh; 
+            animation: pageEnter 0.8s ease; 
+        }
+        .active-page { display: block; } 
+
+        @keyframes pageEnter {
+            from { opacity: 0; transform: scale(1.05) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        header { text-align: center; margin-top: 0; margin-bottom: 50px; width: 100%; }
+        header h1 { font-size: 3.5rem; color: #2c3e50; margin: 0; }
+        header p { color: var(--rose); font-style: italic; font-size: 1.2rem; }
+
+        .horizontal-layout {
+            display: flex; flex-direction: row; justify-content: center; 
+            align-items: flex-start; flex-wrap: wrap; 
+            gap: 40px; position: relative; z-index: 10; padding-top: 20px;
+        }
+
+        .card {
+            background: white; border-radius: 20px; padding: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); overflow: hidden;
+            z-index: 1; width: 280px; box-sizing: border-box;
+        }
+        .card img { width: 100%; height: 300px; object-fit: cover; border-radius: 15px; transition: 0.5s; }
+        .card-text { margin-top: 15px; text-align: center; max-height: 0; overflow: hidden; transition: 0.5s ease; }
+        .card-text h3 { color: var(--rose); margin: 10px 0 5px; }
+        .card-text p { font-size: 0.95rem; color: #444; padding: 0 10px 10px; margin: 0; }
+
+        /* Bright Hover Focus */
+        .card:hover {
+            transform: scale(1.2);
+            z-index: 100;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            border: 2px solid var(--gold);
+        }
+        .card:hover .card-text { max-height: 300px; margin-top: 15px; }
+
+    </style>
+</head>
+<body>
+
+<div id="cover-page">
+    <div class="glass-card">
+        <h1 class="cover-heading">EK THA RAJA <br>EK THI RANI<br> SURU HUI <br>PREM KAHANI</h1>
+        <button class="enter-btn" onclick="enterSite()">Enter Their Story</button>
+    </div>
+</div>
+
+<div id="main-wrapper">
+    <nav>
+        <button onclick="showPage('home')">Welcome</button>
+        <button onclick="showPage('cover-beginning')">The Beginning</button>
+        <button onclick="showPage('cover-growing')">Growing</button>
+        <button onclick="showPage('cover-family')">Family</button>
+        <button onclick="showPage('cover-memories')">Memories</button>
+        <button onclick="showPage('cover-silver')">25 Years</button>
+        <button onclick="showPage('cover-wishes')">Wishes</button>
+    </nav>
+
+    <div id="home" class="page active-page" style="display: flex; flex-direction: column; align-items: center;">
+        <header>
+            <h1>A Legacy of Love</h1>
+            <p>Celebrating 25 Years of Chotte Mama & Chotti Mami</p>
+        </header>
+        <div class="card" style="width: 80%; max-width: 600px;">
+            <img src="image1.jpg" style="height: 450px;">
+            <div class="card-text">
+                <h3>The Happy Couple</h3>
+                <p>Welcome to the digital celebration of a journey that started 25 years ago.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="cover-beginning" class="page chapter-cover">
+        <h2>"The story of a Handsome Boy taking away a beautiful Sweet Girl."</h2>
+        <button class="chapter-btn" onclick="showPage('beginning')">Open Chapter</button>
+    </div>
+    
+    <div id="beginning" class="page">
+        <header><h1>The Beginning</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image2.jpg"><div class="card-text"><h3>First Glance</h3><p>The moment the Handsome Boy met his Sweet Girl.</p></div></div>
+            <div class="card"><img src="image3.jpg"><div class="card-text"><h3>The Promise</h3><p>Walking into a new life together forever.</p></div></div>
+            <div class="card"><img src="image4.jpg"><div class="card-text"><h3>Young Love</h3><p>Starting with dreams and a heart full of love.</p></div></div>
+            <div class="card"><img src="image5.jpg"><div class="card-text"><h3>New Journey</h3><p>Setting the foundation of our beautiful family.</p></div></div>
+        </div>
+    </div>
+
+    <div id="cover-growing" class="page chapter-cover">
+        <h2>"Growing Together all these 25 years, fighting through all the hurdles and rising together."</h2>
+        <button class="chapter-btn" onclick="showPage('growing')">Open Chapter</button>
+    </div>
+
+    <div id="growing" class="page">
+        <header><h1>Growing Together</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image6.jpg"><div class="card-text"><h3>Stronger Together</h3><p>Proving that united, no hurdle is too big.</p></div></div>
+            <div class="card"><img src="image7.jpg"><div class="card-text"><h3>Building Dreams</h3><p>Patience, hard work, and mutual respect.</p></div></div>
+            <div class="card"><img src="image8.jpg"><div class="card-text"><h3>Partners</h3><p>Fighting the world for each other.</p></div></div>
+            <div class="card"><img src="image9.jpg"><div class="card-text"><h3>Endless Support</h3><p>Mama's strength and Mami's unwavering love.</p></div></div>
+        </div>
+    </div>
+
+    <div id="cover-family" class="page chapter-cover">
+        <h2>"How they became 4 from 2, blessing us with a beautiful daughter & sister Munni, and a smart techie boy & brother Yash."</h2>
+        <button class="chapter-btn" onclick="showPage('family')">Open Chapter</button>
+    </div>
+
+    <div id="family" class="page">
+        <header><h1>The Beautiful Family</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image10.jpg"><div class="card-text"><h3>Our Munni</h3><p>The daughter who filled the house with joy.</p></div></div>
+            <div class="card"><img src="image11.jpg"><div class="card-text"><h3>Brother Yash</h3><p>The smart techie making the family proud.</p></div></div>
+            <div class="card"><img src="image12.jpg"><div class="card-text"><h3>Perfect 4</h3><p>The best parents and the luckiest children.</p></div></div>
+            <div class="card"><img src="image13.jpg"><div class="card-text"><h3>Family First</h3><p>Our ultimate home and safe space.</p></div></div>
+        </div>
+    </div>
+
+    <div id="cover-memories" class="page chapter-cover">
+        <h2>"Nurturing all those memories, from how they raised us all together to becoming the cutest couple of the family."</h2>
+        <button class="chapter-btn" onclick="showPage('memories')">Open Chapter</button>
+    </div>
+
+    <div id="memories" class="page">
+        <header><h1>Nurturing Memories</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image14.jpg"><div class="card-text"><h3>Golden Days</h3><p>Nurturing us with values and warmth.</p></div></div>
+            <div class="card"><img src="image15.jpg"><div class="card-text"><h3>Cutest Couple</h3><p>Still looking at each other like day one.</p></div></div>
+            <div class="card"><img src="image16.jpg"><div class="card-text"><h3>Joy</h3><p>Smiles that define our home.</p></div></div>
+            <div class="card"><img src="image17.jpg"><div class="card-text"><h3>Love</h3><p>They showed us what true love is.</p></div></div>
+        </div>
+    </div>
+
+    <div id="cover-silver" class="page chapter-cover">
+        <h2>"A congratulations to the couple for their silver jubilee, and for the miles they have walked together."</h2>
+        <button class="chapter-btn" onclick="showPage('silver')">Open Chapter</button>
+    </div>
+
+    <div id="silver" class="page">
+        <header><h1>The Silver Jubilee</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image18.jpg"><div class="card-text"><h3>25 Years Strong</h3><p>A milestone beautifully lived.</p></div></div>
+            <div class="card"><img src="image19.jpg"><div class="card-text"><h3>Still Shining</h3><p>Silver looks good on you!</p></div></div>
+            <div class="card"><img src="image20.jpg"><div class="card-text"><h3>Milestones Walked</h3><p>Every mile was worth it.</p></div></div>
+            <div class="card"><img src="image21.jpg"><div class="card-text"><h3>Jubilee Glow</h3><p>Fresh as a rose after 25 years.</p></div></div>
+        </div>
+    </div>
+
+    <div id="cover-wishes" class="page chapter-cover">
+        <h2>"Wishing them a happy married life again, from the family who loves them the most."</h2>
+        <button class="chapter-btn" onclick="showPage('wishes')">Open Chapter</button>
+    </div>
+
+    <div id="wishes" class="page">
+        <header><h1>Wishes from the Heart</h1></header>
+        <div class="horizontal-layout">
+            <div class="card"><img src="image22.jpg"><div class="card-text"><h3>From All of Us</h3><p>May your love continue to inspire.</p></div></div>
+            <div class="card"><img src="image23.jpg"><div class="card-text"><h3>Happy Life</h3><p>Health, wealth, and smiles.</p></div></div>
+            <div class="card"><img src="image24.jpg"><div class="card-text"><h3>To Eternity</h3><p>Can't wait for your Golden 50th!</p></div></div>
+            <div class="card"><img src="image25.jpg"><div class="card-text"><h3>We Love You!</h3><p>Happy Anniversary Mama & Mami!</p></div></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function createHearts() {
+        const coverPage = document.getElementById('cover-page');
+        const heartIcons = ['❤️', '💖', '💕', '💗'];
+        for (let i = 0; i < 35; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-float');
+            heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * (3 - 1.5) + 1.5 + 'rem';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = Math.random() * (12 - 7) + 7 + 's';
+            coverPage.appendChild(heart);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', createHearts);
+
+    function enterSite() {
+        document.getElementById('cover-page').classList.add('hide-cover');
+        document.getElementById('main-wrapper').classList.add('show-content');
+    }
+
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active-page');
+            if (p.id === 'home') p.style.display = 'none';
+        });
+        const target = document.getElementById(id);
+        target.classList.add('active-page');
+        if(id === 'home') target.style.display = 'flex';
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
